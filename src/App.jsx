@@ -1,20 +1,37 @@
+import "./App.css";
 import { Square } from "./components/Square.jsx";
 import { WinnerModal } from "./components/WinnerModal.jsx";
-import "./App.css";
+import { TURNS } from "./constants.js";
+
+const board = Array(9).fill(null);
+
+const updateBoard = (index) => {};
+
+const resetGame = () => {
+  setBoard(Array(9).fill(null));
+  setTurn(TURNS.X);
+  setWinner(null);
+
+  resetGameStorage();
+};
 
 function App() {
   return (
     <>
-      <h1>Tic-tac-toe game</h1>
-      <Square index="0" />
-      <Square index="1" />
-      <Square index="2" />
-      <Square index="3" />
-      <Square index="4" />
-      <Square index="5" />
-      <Square index="6" />
-      <Square index="7" />
-      <Square index="8" />
+      <main className="board">
+        <h1>Tic-tac-toe game</h1>
+        <section className="game">
+          {board.map((square, index) => {
+            return (
+              <Square key={index} index={index} updateBoard={updateBoard}>
+                {square}
+              </Square>
+            );
+          })}
+        </section>
+        <span>X</span>
+        <span>O</span>
+      </main>
     </>
   );
 }
