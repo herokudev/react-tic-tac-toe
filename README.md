@@ -37,7 +37,7 @@ git https://github.com/herokudev/react-tic-tac-toe.git
 
 2. Now that you have already cloned the repo run the following commands to get the project up and running:
 ```sh
-cd funval-splitter
+cd tic-tac-toe
 npm install
 npm run dev
 ```
