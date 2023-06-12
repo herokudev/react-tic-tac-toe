@@ -5,6 +5,7 @@ import { TURNS } from "./constants.js";
 import { checkWinnerFrom, checkEndGame } from "./logic/board.js";
 import { useState } from "react";
 import confetti from "canvas-confetti";
+import { saveGameToStorage, resetGameStorage } from "./logic/storage/index.js";
 
 function App() {
   const [board, setBoard] = useState(() => {
@@ -25,6 +26,8 @@ function App() {
     setBoard(Array(9).fill(null));
     setTurn(TURNS.X);
     setWinner(null);
+
+    resetGameStorage();
   };
 
   const updateBoard = (index) => {
@@ -38,6 +41,11 @@ function App() {
     // cambiar el turno
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
     setTurn(newTurn);
+    // guardar aqui partida
+    saveGameToStorage({
+      board: newBoard,
+      turn: newTurn,
+    });
     // revisar si hay ganador
     const newWinner = checkWinnerFrom(newBoard);
     if (newWinner) {
